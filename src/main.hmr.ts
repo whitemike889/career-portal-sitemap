@@ -1,7 +1,9 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import * as hbs from 'hbs';
-import * as helpers from 'hbs-helpers';
+import * as helpers from 'handlebars-intl';
+
+const PORT = process.env.PORT || 3000;
 
 declare const module: any;
 
@@ -11,11 +13,9 @@ async function bootstrap() {
   app.setBaseViewsDir(__dirname + '/views');
   app.setViewEngine('hbs');
 
-  Object.keys(helpers).forEach((key) => {
-    hbs.registerHelper(key, helpers[key]);
-  });
+  helpers.registerWith(hbs);
 
-  await app.listen(3000);
+  await app.listen(PORT);
 
   if (module.hot) {
     module.hot.accept();
