@@ -11,17 +11,17 @@
   "description" : "{{ job.publicDescription }}",
   "identifier": {
     "@type": "PropertyValue",
-    "name": "MagsRUs Wheel Company",
-    "value": "1234567"
+    "name": "{{ job.title }}",
+    "value": "{{ job.id }}"
   },
-  "datePosted" : "{{ job.dateLastPublished}}",
-  "validThrough" : "2017-03-18T00:00",
-  "employmentType" : "CONTRACTOR",
+  "datePosted" : "{{ job.dateLastPublished }}",
+  "validThrough" : "{{ job.validThrough }}",
+  "employmentType" : "{{ job.employmentType }}",
   "hiringOrganization" : {
     "@type" : "Organization",
-    "name" : "Acme Bulls, llc",
-    "sameAs" : "http://www.bullhorn.com",
-    "logo" : "http://www.bullhorn.com/images/logo.png"
+    "name" : "{{companyName}}",
+    "sameAs" : "{{companyWebsite}}",
+    "logo" : "{{companyLogo}}"
   },
   "jobLocation" : {
     "@type" : "Place",
@@ -33,16 +33,26 @@
       "postalCode" : "{{job.address.zip}}",
       "addressCountry": "US"
     }
-  },
+  }{{#if job.salary}},
+  "baseSalary": {
+    "@type": "MonetaryAmount",
+    "currency": "USD",
+    "value": {
+      "@type": "QuantitativeValue",
+      "value": {{ job.salary }},
+      "unitText": "YEAR"
+    }
+  }{{else}},
   "baseSalary": {
     "@type": "MonetaryAmount",
     "currency": "USD",
     "value": {
       "@type": "QuantitativeValue",
       "value": {{ job.payRate }},
-      "unitText": "HOUR"
+      "unitText": "{{ job.salaryUnit }}"
     }
   }
+  {{/if}}
 }
 </script>
     <style>
@@ -231,17 +241,20 @@
                 <header>
                     <hgroup>
                         <h1 class="title">{{ job.title }}</h1>
-                        <h2 class="sub_title">Taurus Staffing</h2>
+                        <h2 class="sub_title">{{companyName}}</h2>
                     </hgroup>
-                    <img class="logo" src="/logo.png"> 
+                    <img class="logo" src="{{companyLogo}}"> 
                 </header>
                 <p class="description">{{{ job.publicDescription }}}</p>
                 <div class="post-meta">
                     <span class="timestamp">
                         <i class="fa fa-map-marker-alt"></i>{{ job.address.city }}, {{ job.address.state }}</span>
                     <span class="comments">
-                        {{!-- <i class="fa fa-dollar-sign"></i> --}}
-                        <a href="#">{{ formatNumber job.payRate style="currency" currency="USD" }}</a>
+                        {{#if job.salary}}
+                        <a href="#">{{ formatNumber job.salary style="currency" currency="USD" }}</a>
+                        {{else}}
+                        <a href="#">{{ formatNumber job.payRate style="currency" currency="USD" }} {{job.salaryUnit}}</a>
+                        {{/if}}
                     </span>
                 </div>
             </div>

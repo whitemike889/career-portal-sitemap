@@ -5,11 +5,11 @@
   "license": "MIT",
   "scripts": {
     "format": "prettier --write \"src/**/*.ts\"",
-    "start": "ts-node -r tsconfig-paths/register src/main.ts",
+    "prestart": "rimraf dist && tsc",
+    "start": "node --icu-data-dir=node_modules/node-icu dist/main.js",
+    "start:test": "ts-node -r tsconfig-paths/register src/main.ts",
     "start:dev": "nodemon",
     "start:debug": "nodemon --config nodemon-debug.json",
-    "prestart:prod": "rimraf dist && tsc",
-    "start:prod": "node dist/main.js",
     "start:hmr": "node dist/server",
     "lint": "tslint -p tsconfig.json -c tslint.json",
     "test": "jest",
@@ -19,6 +19,7 @@
     "webpack": "webpack --config webpack.config.js"
   },
   "dependencies": {
+    "@bullhorn/bullhorn-types": "0.0.3",
     "@nestjs/common": "^5.0.0",
     "@nestjs/core": "^5.0.0",
     "@nestjs/microservices": "^5.0.0",
@@ -27,6 +28,7 @@
     "axios": "^0.18.0",
     "handlebars-intl": "^1.1.2",
     "hbs": "^4.0.1",
+    "node-icu": "^1.1.0",
     "reflect-metadata": "^0.1.12",
     "rxjs": "^6.0.0",
     "sitemap": "^1.13.0",

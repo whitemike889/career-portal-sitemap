@@ -9,16 +9,25 @@ const intlData = {
 
 const publicRestEndpoint: string = process.env.BULLHORN_PUBLIC_ENDPOINT;
 const hostedEndpoint: string = process.env.HOSTED_ENDPOINT;
+const companyName: string = process.env.COMPANY_NAME;
+const companyLogo: string = process.env.COMPANY_LOGO_URL;
+const companyWebsite: string = process.env.COMPANY_WEBSITE;
 
 @Controller()
 export class AppController {
-  constructor(private readonly appService: AppService) {}
+  constructor(private readonly service: AppService) {}
 
   @Get()
-  @Render('config')
+  @Render('list')
   async root(): Promise<any> {
     // return this.appService.root();
-    return {};
+    const jobs = await this.service.getJobs();
+    return {
+      jobs: jobs.data,
+      companyName,
+      companyLogo,
+      companyWebsite,
+    };
   }
 
   @Get('sitemap.xml')
@@ -29,9 +38,7 @@ export class AppController {
       hostname: hostedEndpoint,
       cacheTime: 600000,  // 600 sec cache period
     });
-    return axios.get(`${publicRestEndpoint}/search/JobOrder?fields=id,title,dateLastPublished&query=isDeleted:0&sort=-dateLastPublished&count=20`)
-      .then((res: AxiosResponse) => res.data)
-      .then((results: any) => {
+    return this.service.getJobs().then((results) => {
         for ( const job of results.data) {
           map.add({url: `/jobs/${job.id}`, lastmodISO: (new Date(job.dateLastPublished || Date.now())).toISOString()});
         }
@@ -46,14 +53,38 @@ export class AppController {
   @Get('jobs/:id')
   @Render('job')
   async job( @Response() response, @Param('id') id: number ) {
-    return axios.get(`${publicRestEndpoint}/search/JobOrder?fields=*&query=id:${id}`)
-      .then((res: AxiosResponse) => res.data)
-      .then((result: any) => {
-        const job = result.data[0];
-        return { job: Object.assign({}, job, { startDate: new Date(job.startDate) }), intl: intlData };
-      }).catch((err) => {
-        console.error(err.message);
-        return err.message;
-      });
+    const job: any = await this.service.getJob(id);
+    const published = new Date(job.dateLastPublished);
+    let employmentType: string = job.employmentType;
+    switch (employmentType.toLowerCase().replace(/\s-_/gi, '')) {
+      case 'fulltime':
+        employmentType = 'FULL_TIME';
+        break;
+      case 'parttime':
+        employmentType = 'PART_TIME';
+        break;
+      case 'contract':
+      case 'contractor':
+        employmentType = 'CONTRACTOR';
+        break;
+      case 'temp':
+      case 'temporary':
+        employmentType = 'TEMPORARY';
+        break;
+      default:
+        employmentType = 'OTHER';
+        break;
+    }
+    return {
+      job: Object.assign({}, job, {
+        startDate: new Date(job.startDate),
+        dateLastPublished: published.toISOString(),
+        validThrough: new Date(published.setDate(published.getDate() + 7)).toISOString(),
+      }),
+      companyName,
+      companyLogo,
+      companyWebsite,
+      intl: intlData,
+    };
   }
 }

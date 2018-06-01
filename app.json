@@ -17,6 +17,10 @@
       "description": "What is your company name?",
       "required": "true"
     },
+    "COMPANY_WEBSITE": {
+      "description": "What is your company website?",
+      "required": "true"
+    },
     "COMPANY_LOGO_URL": {
       "description": "Url for you companies logo?",
       "required": "true"
