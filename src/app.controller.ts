@@ -1,6 +1,5 @@
 import { Get, Controller, Response, Param, Render } from '@nestjs/common';
 import { AppService } from './app.service';
-import axios, { AxiosResponse } from 'axios';
 import * as sitemap from 'sitemap';
 
 const intlData = {
@@ -12,6 +11,7 @@ const hostedEndpoint: string = process.env.HOSTED_ENDPOINT;
 const companyName: string = process.env.COMPANY_NAME;
 const companyLogo: string = process.env.COMPANY_LOGO_URL;
 const companyWebsite: string = process.env.COMPANY_WEBSITE;
+const googleVerificationCode: string = process.env.GOOGLE_VERIFICATION_CODE;
 
 @Controller()
 export class AppController {
@@ -27,6 +27,7 @@ export class AppController {
       companyName,
       companyLogo,
       companyWebsite,
+      googleVerificationCode,
     };
   }
 

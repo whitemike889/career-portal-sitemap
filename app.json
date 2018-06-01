@@ -24,6 +24,10 @@
     "COMPANY_LOGO_URL": {
       "description": "Url for you companies logo?",
       "required": "true"
+    },
+    "GOOGLE_VERIFICATION_CODE": {
+      "description": "HTML tag Verification Code from https://www.google.com/webmasters/verification/verification",
+      "required": "true"
     }
   }
 }
