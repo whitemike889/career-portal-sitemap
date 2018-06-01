@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Bullhorn Careers</title>
+    <style>
+        body {
+            background: #f2f2f2;
+            font-family: 'proxima-nova-soft', sans-serif;
+            font-size: 14px;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        .post-module {
+            position: relative;
+            z-index: 1;
+            display: block;
+            background: #FFFFFF;
+            min-width: 270px;
+            min-height: 470px;
+            -webkit-box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.15);
+            -moz-box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.15);
+            box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.15);
+            -webkit-transition: all 0.3s linear 0s;
+            -moz-transition: all 0.3s linear 0s;
+            -ms-transition: all 0.3s linear 0s;
+            -o-transition: all 0.3s linear 0s;
+            transition: all 0.3s linear 0s;
+        }
+
+        .post-module .thumbnail {
+            background: linear-gradient(-70deg, #DD7788 30%, rgba(0, 0, 0, 0) 30%), linear-gradient(-30deg, #BB5566 60%, #993344 60%);
+            height: 50px;
+            overflow: hidden;
+        }
+
+        .post-module .thumbnail .date {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            z-index: 1;
+            background: #e74c3c;
+            width: 55px;
+            height: 55px;
+            font-size: 26px;
+            padding: 12.5px 0;
+            -webkit-border-radius: 100%;
+            -moz-border-radius: 100%;
+            border-radius: 100%;
+            color: #FFFFFF;
+            font-weight: 700;
+            text-align: center;
+            -webkti-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+        }
+
+        .post-module .post-content {
+            position: relative;
+            bottom: 0;
+            background: #FFFFFF;
+            width: 100%;
+            padding: 30px;
+            -webkti-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+            -webkit-transition: all 0.3s cubic-bezier(0.37, 0.75, 0.61, 1.05) 0s;
+            -moz-transition: all 0.3s cubic-bezier(0.37, 0.75, 0.61, 1.05) 0s;
+            -ms-transition: all 0.3s cubic-bezier(0.37, 0.75, 0.61, 1.05) 0s;
+            -o-transition: all 0.3s cubic-bezier(0.37, 0.75, 0.61, 1.05) 0s;
+            transition: all 0.3s cubic-bezier(0.37, 0.75, 0.61, 1.05) 0s;
+        }
+
+        .post-module .post-content .category {
+            position: absolute;
+            top: -20px;
+            left: 0;
+            background: #e74c3c;
+            padding: 10px 15px;
+            color: #FFFFFF;
+            font-size: 14px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .post-module .post-content .title {
+            margin: 0;
+            padding: 0 0 10px;
+            color: #333333;
+            font-size: 26px;
+            font-weight: 700;
+        }
+
+        .post-module .post-content .sub_title {
+            margin: 0;
+            padding: 0 0 0px;
+            color: #e74c3c;
+            font-size: 20px;
+            font-weight: 400;
+        }
+
+        .post-module .post-content header {
+            display: flex;
+            flex-flow: row nowrap;
+            justify-content: space-between;
+        }
+
+        .post-module .post-content header .logo {
+            height: 70px;
+        }
+
+        .post-module .post-content .description {
+            color: #666666;
+            font-size: 14px;
+            line-height: 1.8em;
+        }
+
+        .post-module .post-content .post-meta {
+            margin: 30px 0 0;
+            color: #999999;
+        }
+
+        .post-module .post-content .post-meta .timestamp {
+            margin: 0 16px 0 0;
+        }
+
+        .post-module .post-content .post-meta a {
+            color: #999999;
+            text-decoration: none;
+        }
+
+        .container {
+            max-width: 800px;
+            min-width: 640px;
+            margin: 0 auto;
+        }
+
+        .container:before,
+        .container:after {
+            content: '';
+            display: block;
+            clear: both;
+        }
+
+
+        form {
+            display: block;
+            margin: 20px auto;
+            {{!-- width: 950px; --}}
+            overflow: hidden;
+            background: #FFF;
+            border: 1px solid #E4E4E4;
+            border-radius: 5px;
+            font-size: 0;
+        }
+
+        form>div {
+            display: inline-block;
+            width: 100%;
+        }
+
+        form>div>label {
+            display: block;
+            padding: 20px 20px 10px;
+            vertical-align: top;
+            font-family: Source Sans Pro, Arial, sans-serif;
+            font-size: 14px;
+            font-weight: 600;
+            text-transform: uppercase;
+            color: #939393;
+            cursor: pointer;
+        }
+        
+        form>div.col-1,
+        form>div.col-2,
+        form>div.col-3,
+        form>div.col-4 {
+            box-shadow: 1px 1px #E4E4E4
+        }
+
+        form>div.col-2 {
+            width: 50%
+        }
+
+        form>div.col-3 {
+            width: 33.3333333333%
+        }
+
+        form>div.col-4 {
+            width: 25%
+        }
+
+        form>div>label>input {
+            display: inline-block;
+            position: relative;
+            width: 100%;
+            height: 27px;
+            line-height: 27px;
+            margin: 5px -5px 0;
+            padding: 7px 5px 3px;
+            border: none;
+            outline: none;
+            border-radius: 3px;
+            background: transparent;
+            font-size: 14px;
+            font-weight: 200;
+            opacity: .66;
+            transition: opacity .3s;
+        }
+
+        form>div>label>select {
+            display: block;
+            width: 100%;
+            margin: 16px 0 6px;
+            padding: 0;
+            background: transparent;
+            border: none;
+            outline: none;
+            font-size: 14px;
+            font-weight: 200;
+            opacity: .33;
+        }
+
+        form>div>label>input:focus,
+        form>div>label>select:focus {
+            opacity: 1;
+        }
+
+        form  button[type="submit"] {
+            padding: 12px;
+            background: green;
+            width: 100%;
+            font-size: 18px;
+            font-weight: 500;
+            text-transform: uppercase;
+            color: #fff;
+        }
+    </style>
+    <link rel="stylesheet"
+          href="https://use.fontawesome.com/releases/v5.0.13/css/all.css"
+          integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp"
+          crossorigin="anonymous">
+
+</head>
+
+<body>
+    <div class="container">
+        <!-- Post-->
+        <div class="post-module">
+            <!-- Thumbnail-->
+            <div class="thumbnail">
+                <div class="date">
+                    <i class="fa fa-cogs"></i>
+                </div>
+            </div>
+            <!-- Post Content-->
+            <div class="post-content">
+                <div class="category">Configurations</div>
+                <header>
+                    <hgroup>
+                        <h1 class="title">Getting Started</h1>
+                        <h2 class="sub_title">Just answer these few questions:</h2>
+                    </hgroup>
+                </header>
+                <form>
+                    <div class="col-1">
+                        <label>
+                            Bullhorn Public Endpoint
+                            <input placeholder="What is your company's public endpoint?"
+                                   tabindex="1" />
+                        </label>
+                    </div>
+                    <div class="col-2">
+                        <label>
+                            Company Name
+                            <input placeholder="What is your company name?"
+                                   tabindex="1" />
+                        </label>
+                    </div>
+                    <div class="col-2">
+                        <label>
+                            Contact Name
+                            <input placeholder="Who represents your company?"
+                                   tabindex="2" />
+                        </label>
+                    </div>
+                    <div class="col-2">
+                        <label>
+                            Phone
+                            <input placeholder="What is the contact's phone number?"
+                                   tabindex="3" />
+                        </label>
+                    </div>
+                    <div class="col-2">
+                        <label>
+                            Email
+                            <input placeholder="What is the contact's email?"
+                                   tabindex="4" />
+                        </label>
+                    </div>
+                    <div class="col-1">
+                        <label>
+                            Color Theme
+                            <select tabindex="5">
+                                <option>Orange</option>
+                                <option>Red</option>
+                                <option>Blue</option>
+                            </select>
+                        </label>
+                    </div>
+                    <div class="col-4">
+                       <button type="submit"
+                                   tabindex="6">Save <i class="fa fa-save"></i></button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

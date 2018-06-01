@@ -1,0 +1,25 @@
+{
+  "name": "Bullhorn Published Jobs Portal",
+  "description": "A simple integration application to publish jobs to Google",
+  "repository": "https://github.com/bullhorn/jobs-publisher",
+  "logo": "https://1agb93314bcf1knhv22id9u9-wpengine.netdna-ssl.com/wp-content/uploads/2016/12/bh-logo.png",
+  "keywords": ["bullhorn", "careers", "staffing"],
+  "env": {
+    "BULLHORN_PUBLIC_ENDPOINT": {
+      "description": "Location of your company's public rest endpoint.",
+      "required": "true"
+    },
+    "HOSTED_ENDPOINT": {
+      "description": "Where is this site hosted?",
+      "required": "true"
+    },
+    "COMPANY_NAME": {
+      "description": "What is your company name?",
+      "required": "true"
+    },
+    "COMPANY_LOGO_URL": {
+      "description": "Url for you companies logo?",
+      "required": "true"
+    }
+  }
+}
