@@ -33,7 +33,7 @@
       "postalCode" : "{{job.address.zip}}",
       "addressCountry": "US"
     }
-  }{{#if job.salary}},
+  {{!-- }{{#if job.salary}},
   "baseSalary": {
     "@type": "MonetaryAmount",
     "currency": "USD",
@@ -52,7 +52,7 @@
       "unitText": "{{ job.salaryUnit }}"
     }
   }
-  {{/if}}
+  {{/if}} --}}
 }
 </script>
     <style>
@@ -249,13 +249,13 @@
                 <div class="post-meta">
                     <span class="timestamp">
                         <i class="fa fa-map-marker-alt"></i>{{ job.address.city }}, {{ job.address.state }}</span>
-                    <span class="comments">
+                    {{!-- <span class="comments">
                         {{#if job.salary}}
                         <a href="#">{{ formatNumber job.salary style="currency" currency="USD" }}</a>
                         {{else}}
                         <a href="#">{{ formatNumber job.payRate style="currency" currency="USD" }} {{job.salaryUnit}}</a>
                         {{/if}}
-                    </span>
+                    </span> --}}
                 </div>
             </div>
         </div>
