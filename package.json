@@ -25,7 +25,7 @@
     "@nestjs/microservices": "^5.0.0",
     "@nestjs/testing": "^5.0.0",
     "@nestjs/websockets": "^5.0.0",
-    "axios": "^0.18.0",
+    "axios": "^0.21.1",
     "handlebars-intl": "^1.1.2",
     "hbs": "^4.0.1",
     "node-icu": "^1.1.0",
