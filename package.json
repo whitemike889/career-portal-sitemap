@@ -21,7 +21,7 @@
   "dependencies": {
     "@bullhorn/bullhorn-types": "0.0.3",
     "@nestjs/common": "^5.0.0",
-    "@nestjs/core": "^5.0.0",
+    "@nestjs/core": "^9.2.1",
     "@nestjs/microservices": "^5.0.0",
     "@nestjs/testing": "^5.0.0",
     "@nestjs/websockets": "^5.0.0",
